@@ -1,8 +1,5 @@
 from struct import unpack
 
-test_bytes = b'\x00\x00\x00d\x00\x10\x00\x00\x00\x00\x00\x05\x00\x00\x00\x00'
-test_bytes2 = b'nmslasdafsd5ghet'
-
 
 class HeaderError(Exception):
     def __init__(self, error_info):
@@ -41,6 +38,9 @@ class Header:
         return ', '.join(string_list)
 
 
-header = Header(test_bytes)
-# header = Header(test_bytes2)
-print(header)
+if __name__ == '__main__':
+    test_bytes = b'\x00\x00\x00d\x00\x10\x00\x00\x00\x00\x00\x05\x00\x00\x00\x00'
+    test_bytes2 = b'nmslasdafsd5ghet'
+    header = Header(test_bytes)
+    # header = Header(test_bytes2)
+    print(header)
