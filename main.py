@@ -9,6 +9,20 @@ from time import sleep
 sequence = 0
 
 
+class Header:
+    index = (4, 6, 8, 12, 16)
+
+    def __init__(self, string: bytes):
+        self.header_list = []
+        self.string = string
+        for e, i in enumerate(self.index):
+            self.header_list.append(string[0 if e == 0 else self.index[e - 1]:i])
+
+    def __getitem__(self, item: int):
+        temp = self.header_list[item]
+        return unpack('>i' if len(temp) == 4 else '>h', temp)[0]
+
+
 # 获取当前时间
 def get_time():
     return time.strftime('[%H:%M:%S] ', time.localtime())
@@ -61,29 +75,31 @@ def send_heartbeat(ws: websocket.WebSocketApp):
 def recv_msg(ws: websocket.WebSocketApp):
     while True:
         msg = ws.recv()
-        if unpack('>i', msg[0:4])[0] != len(msg):
+        header = Header(msg[:16])
+        if header[0] != len(msg):
             # 一个包多条命令
             # 没见过，见过再补
             print('一个包多条命令')
             save_log(msg, ' 一个包多条命令')
         else:
-            if unpack('>i', msg[8:12])[0] == 3:
+            if header[3] == 3:
                 # 心跳包回复
                 print(f'{get_time()}心跳包回复: {unpack(">i", msg[16:])[0]}')
-            elif unpack('>i', msg[8:12])[0] == 5:
+            elif header[3] == 5:
                 # 普通包(命令)
-                if unpack('>h', msg[6:8])[0] == 0:
+                if header[2] == 0:
                     # 普通包不压缩
                     handle_msg(msg[16:])
-                elif unpack('>h', msg[6:8])[0] == 1:
+                elif header[2] == 1:
                     # 心跳&认证包不压缩
                     # 没见过，见过再补
                     print(f'{get_time()}心跳&认证包不压缩')
                     save_log(msg, ' 心跳&认证包不压缩')
-                elif unpack('>h', msg[6:8])[0] == 2:
+                elif header[2] == 2:
                     # 普通包使用zlib压缩
                     msg_decompress = zlib.decompress(msg[16:])
-                    if unpack('>i', msg_decompress[:4])[0] == len(msg_decompress):
+                    header_decompress = Header(msg_decompress[:16])
+                    if header_decompress[0] == len(msg_decompress):
                         # 解压后单条命令
                         handle_msg(msg_decompress[16:])
                     else:
@@ -97,7 +113,7 @@ def recv_msg(ws: websocket.WebSocketApp):
                             data_len2 += data_len1
                             if data_len2 == len(msg_decompress):
                                 split_not_done = False
-                elif unpack('>h', msg[6:8])[0] == 3:
+                elif header[2] == 3:
                     # 普通包正文使用brotli压缩,解压为一个带头部的协议0普通包
                     # 没见过，见过再补
                     print(f'{get_time()}普通包正文使用brotli压缩,解压为一个带头部的协议0普通包')
