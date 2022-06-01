@@ -6,21 +6,9 @@ import time
 import threading
 from time import sleep
 
+from bilibili_web_header import Header
+
 sequence = 0
-
-
-class Header:
-    index = (4, 6, 8, 12, 16)
-
-    def __init__(self, string: bytes):
-        self.header_list = []
-        self.string = string
-        for e, i in enumerate(self.index):
-            self.header_list.append(string[0 if e == 0 else self.index[e - 1]:i])
-
-    def __getitem__(self, item: int):
-        temp = self.header_list[item]
-        return unpack('>i' if len(temp) == 4 else '>h', temp)[0]
 
 
 # 获取当前时间
