@@ -21,7 +21,7 @@ def save_log(msg: bytes, info: str = ''):
 
 
 # 发送消息添加头部
-def encode(msg: str, op: int, seq: int) -> str:
+def encode(msg: str, op: int, seq: int):
     data = msg.encode('utf-8')
     packet_len = pack('>i', 16 + len(data))
     return packet_len + pack('>h', 16) + pack('>h', 0) + pack('>i', op) + pack('>i', seq) + data
@@ -106,29 +106,6 @@ def recv_msg(ws: websocket.WebSocketApp):
                 # 其他包，没见过，见过再补
                 print(f'{get_time()}其他包, 操作码: {unpack(">i", msg[8:12])[0]}')
                 save_log(msg, f' 其他包 操作码: {unpack(">i", msg[8:12])[0]}')
-
-        # if msg[11] == 3:
-        #     print(f'{get_time()}心跳包:', unpack('>i', msg[16:20]), str(msg[20:], encoding='utf-8'))
-        # elif msg[11] == 5 and msg[7] == 2:
-        #     msg_decompress = zlib.decompress(msg[16:])
-        #     if msg_decompress[6] == 0:
-        #         msg_decompress = msg_decompress[:unpack('>i', msg_decompress[:4])[0]]
-        #         msg_dict = json.loads(msg_decompress[16:])
-        #         if msg_dict['cmd'] == 'DANMU_MSG':
-        #             print(f'{get_time()}{msg_dict["info"][2][1]}: {msg_dict["info"][1]}')
-        #         else:
-        #             print(f'{get_time()}收到了一个未知的消息: {msg_dict["cmd"]}')
-        #             save_log(msg_decompress, f' {msg_dict["cmd"]}')
-        #     else:
-        #         # msg_dict = json.loads(msg_decompress)
-        #         print(f'{get_time()}不知道收到的是个啥无头包')
-        #         save_log(msg_decompress, ' unknown')
-        # elif msg[24:43] == b'STOP_LIVE_ROOM_LIST':
-        #     save_log(msg, ' STOP_LIVE_ROOM_LIST')
-        #     print(f'{get_time()}收到个STOP_LIVE_ROOM_LIST包')
-        # else:
-        #     print(f'{get_time()}不知道收到的是个啥包')
-        #     save_log(msg, ' unknown')
 
 
 def main():
