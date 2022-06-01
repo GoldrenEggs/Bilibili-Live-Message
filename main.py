@@ -128,11 +128,16 @@ def main():
     webs = websocket.create_connection("ws://broadcastlv.chat.bilibili.com:2244/sub")
     if send_auth(webs):
         print(f'{get_time()}认证成功')
-        threading.Thread(target=send_heartbeat, args=(webs,)).start()
-        threading.Thread(target=recv_msg, args=(webs,)).start()
+        threading.Thread(target=send_heartbeat, args=(webs,), daemon=True).start()
+        threading.Thread(target=recv_msg, args=(webs,), daemon=True).start()
     else:
         print('认证失败')
         webs.close()
+        return
+    while True:
+        cmd = input()
+        if cmd == 'q':
+            return
 
 
 if __name__ == '__main__':
