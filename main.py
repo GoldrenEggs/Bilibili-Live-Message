@@ -1,3 +1,4 @@
+import requests
 import websocket
 import zlib
 from struct import pack, unpack
@@ -5,10 +6,10 @@ import json
 import time
 import threading
 from time import sleep
-
 from bilibili_web_header import Header
 
 sequence = 0
+roomid = 4069612
 
 
 # 获取当前时间
@@ -18,12 +19,12 @@ def get_time():
 
 # 保存消息
 def save_log(msg: bytes, info: str = ''):
-    with open(time.strftime(f'%Y-%m-%d_%H-%M-%S{info}', time.localtime()), 'wb') as f:
+    with open(time.strftime(f'logs/%Y-%m-%d_%H-%M-%S{info}', time.localtime()), 'wb') as f:
         f.write(msg)
 
 
 # 发送消息添加头部
-def encode(msg: str, op: int, seq: int):
+def encode(msg: str, op: int, seq: int) -> str:
     data = msg.encode('utf-8')
     packet_len = pack('>i', 16 + len(data))
     return packet_len + pack('>h', 16) + pack('>h', 0) + pack('>i', op) + pack('>i', seq) + data
@@ -34,6 +35,52 @@ def handle_msg(msg: bytes):
     data = json.loads(str(msg, encoding='utf-8'))
     if data['cmd'] == 'DANMU_MSG':
         print(f'{get_time()}{data["info"][2][1]}: {data["info"][1]}')
+    elif data['cmd'] == 'SEND_GIFT':  # 礼物
+        print(f'{get_time()}{data["data"]["uname"]} {data["data"]["action"]}{data["data"]["giftName"]} x{data["data"]["num"]}')
+    elif data['cmd'] == 'COMBO_SEND':  # 礼物连击
+        ...
+    elif data['cmd'] == 'NOTICE_MSG':  # 舰长续费啥的，先存着 批站直播公告
+        save_log(msg, f'_{data["cmd"]}')
+    elif data['cmd'] == 'SUPER_CHAT_MESSAGE':  # 氪金弹幕
+        ...
+    elif data['cmd'] == 'SUPER_CHAT_MESSAGE_JPN':  # 也是氪金弹幕
+        ...
+    elif data['cmd'] == 'ROOM_REAL_TIME_MESSAGE_UPDATE':  # 粉丝变化
+        ...
+    elif data['cmd'] == 'INTERACT_WORD':  # 好像是房间专属表情
+        ...
+    elif data['cmd'] == 'STOP_LIVE_ROOM_LIST':  # 停止房间列表，作用未知
+        ...
+    elif data['cmd'] == 'WATCHED_CHANGE':  # 直播观看人数变化
+        ...
+    elif data['cmd'] == 'ONLINE_RANK_COUNT':  # 氪金榜
+        ...
+    elif data['cmd'] == 'ONLINE_RANK_V2':  # 氪金榜
+        ...
+    elif data['cmd'] == 'ENTRY_EFFECT':  # 可能是入场特效
+        ...
+    elif data['cmd'] == 'HOT_RANK_CHANGED':  # 主播热度
+        ...
+    elif data['cmd'] == 'HOT_RANK_CHANGED_V2':  # 主播热度
+        ...
+    elif data['cmd'] == 'ONLINE_RANK_TOP3':  # 氪金榜前3变动
+        ...
+    elif data['cmd'] == 'VOICE_JOIN_LIST':  # 未知，先存
+        save_log(msg, f'_{data["cmd"]}')
+    elif data['cmd'] == 'VOICE_JOIN_ROOM_COUNT_INFO':  # 未知，先存
+        save_log(msg, f'_{data["cmd"]}')
+    elif data['cmd'] == 'WIDGET_BANNER':  # 好像是批站直播活动横幅
+        save_log(msg, f'_{data["cmd"]}')
+    elif data['cmd'] == 'COMMON_NOTICE_DANMAKU':  # 好像还是批站直播活动
+        save_log(msg, f'_{data["cmd"]}')
+    elif data['cmd'] == 'LIVE':  # 未知，先存
+        save_log(msg, f'_{data["cmd"]}')
+    elif data['cmd'] == 'PREPARING':  # 未知，先存，只有一个roomid
+        save_log(msg, f'_{data["cmd"]}')
+    elif data['cmd'] == 'GUARD_BUY':  # 上船
+        ...
+    elif data['cmd'] == 'USER_TOAST_MSG':  # 续费船
+        ...
     else:
         print(f'{get_time()}未知命令: {data["cmd"]}')
         save_log(msg, f'_UnknownCmd_{data["cmd"]}')
@@ -41,9 +88,11 @@ def handle_msg(msg: bytes):
 
 # 发送认证包
 def send_auth(ws: websocket.WebSocketApp):
+    # r = requests.get('http://api.live.bilibili.com/xlive/web-room/v1/index/getDanmuInfo', params={'id': roomid})
+    # key = r.json()['data']['token']
     global sequence
     sequence += 1
-    ws.send(encode('{"roomid":4069612}', 7, sequence))
+    ws.send(encode('{"roomid":%d}' % roomid, 7, sequence))
     if ws.recv()[16:] == b'{"code":0}':
         return True
     return False
