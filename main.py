@@ -1,33 +1,15 @@
-import requests
 import websocket
 import zlib
-from struct import pack, unpack
+from struct import unpack
 import json
-import time
 import threading
 from time import sleep
 from bilibili_web_header import Header
 
+from tool_function import *
+
 sequence = 0
 roomid = 4069612
-
-
-# 获取当前时间
-def get_time():
-    return time.strftime('[%H:%M:%S] ', time.localtime())
-
-
-# 保存消息
-def save_log(msg: bytes, info: str = ''):
-    with open(time.strftime(f'logs/%Y-%m-%d_%H-%M-%S{info}', time.localtime()), 'wb') as f:
-        f.write(msg)
-
-
-# 发送消息添加头部
-def encode(msg: str, op: int, seq: int) -> str:
-    data = msg.encode('utf-8')
-    packet_len = pack('>i', 16 + len(data))
-    return packet_len + pack('>h', 16) + pack('>h', 0) + pack('>i', op) + pack('>i', seq) + data
 
 
 # 处理接收到的消息
@@ -36,7 +18,9 @@ def handle_msg(msg: bytes):
     if data['cmd'] == 'DANMU_MSG':
         print(f'{get_time()}{data["info"][2][1]}: {data["info"][1]}')
     elif data['cmd'] == 'SEND_GIFT':  # 礼物
-        print(f'{get_time()}{data["data"]["uname"]} {data["data"]["action"]}{data["data"]["giftName"]} x{data["data"]["num"]}')
+        print(
+            f'{get_time()}{data["data"]["uname"]} '
+            f'{data["data"]["action"]}{data["data"]["giftName"]} x{data["data"]["num"]}')
     elif data['cmd'] == 'COMBO_SEND':  # 礼物连击
         ...
     elif data['cmd'] == 'NOTICE_MSG':  # 舰长续费啥的，先存着 批站直播公告
@@ -87,7 +71,7 @@ def handle_msg(msg: bytes):
 
 
 # 发送认证包
-def send_auth(ws: websocket.WebSocketApp):
+def send_auth(ws):
     # r = requests.get('http://api.live.bilibili.com/xlive/web-room/v1/index/getDanmuInfo', params={'id': roomid})
     # key = r.json()['data']['token']
     global sequence
@@ -99,7 +83,7 @@ def send_auth(ws: websocket.WebSocketApp):
 
 
 # 发送心跳包
-def send_heartbeat(ws: websocket.WebSocketApp):
+def send_heartbeat(ws):
     while True:
         sleep(30)
         print(f'{get_time()}发送心跳包')
@@ -109,7 +93,7 @@ def send_heartbeat(ws: websocket.WebSocketApp):
 
 
 # 接收并处理传入消息
-def recv_msg(ws: websocket.WebSocketApp):
+def recv_msg(ws):
     while True:
         msg = ws.recv()
         header = Header(msg[:16])
