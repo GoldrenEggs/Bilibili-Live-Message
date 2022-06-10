@@ -105,6 +105,14 @@ def user_toast_msg(data: dict):
     print(f'{get_time()} 收到包：{data["cmd"]}')
 
 
+def heart_beat_reply(data: dict):
+    ...
+
+
+def auth_reply(data: dict):
+    ...
+
+
 cmd = {'DANMU_MSG': danmu_msg,  # 弹幕
        'SEND_GIFT': send_gift,  # 礼物
        'COMBO_SEND': combo_send,  # 礼物连击
@@ -129,4 +137,7 @@ cmd = {'DANMU_MSG': danmu_msg,  # 弹幕
        'PREPARING': preparing,  # 未知，只有一个roomid
        'GUARD_BUY': guard_buy,  # 上船
        'USER_TOAST_MSG': user_toast_msg,  # 续费船
+
+       'HEART_BEAT_REPLY': heart_beat_reply,  # 自定义包：心跳包回复
+       'AUTH_REPLY': auth_reply,  # 自定义包：认证包回复
        }
