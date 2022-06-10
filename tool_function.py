@@ -4,7 +4,7 @@ from struct import pack
 
 # 获取当前时间
 def get_time():
-    return time.strftime('[%H:%M:%S] ', time.localtime())
+    return time.strftime('[%H:%M:%S]', time.localtime())
 
 
 # 保存消息

@@ -1,108 +1,108 @@
 from tool_function import *
 
 
-def danmu_msg(data: dict, msg: bytes):
-    print(f'{get_time()}{data["info"][2][1]}: {data["info"][1]}')
+def danmu_msg(data: dict):
+    print(f'{get_time()} {data["info"][2][1]}: {data["info"][1]}')
 
 
-def send_gift(data: dict, msg: bytes):
-    print(f'{get_time()}{data["data"]["uname"]} '
+def send_gift(data: dict):
+    print(f'{get_time()} {data["data"]["uname"]} '
           f'{data["data"]["action"]}{data["data"]["giftName"]} x{data["data"]["num"]}')
 
 
-def combo_send(data: dict, msg: bytes):
-    ...
+def combo_send(data: dict):
+    print(f'{get_time()} 收到包：{data["cmd"]}')
 
 
-def notice_msg(data: dict, msg: bytes):
-    save_log(msg, f'_{data["cmd"]}')
-    ...
+def notice_msg(data: dict):
+    print(f'{get_time()} 已保存：{data["cmd"]}')
+    return 'save'
 
 
-def super_chat_message(data: dict, msg: bytes):
-    ...
+def super_chat_message(data: dict):
+    print(f'{get_time()} 收到包：{data["cmd"]}')
 
 
-def super_chat_message_jpn(data: dict, msg: bytes):
-    ...
+def super_chat_message_jpn(data: dict):
+    print(f'{get_time()} 收到包：{data["cmd"]}')
 
 
-def room_real_time_message_update(data: dict, msg: bytes):
-    ...
+def room_real_time_message_update(data: dict):
+    print(f'{get_time()} 收到包：{data["cmd"]}')
 
 
-def interact_word(data: dict, msg: bytes):
-    ...
+def interact_word(data: dict):
+    print(f'{get_time()} 收到包：{data["cmd"]}')
 
 
-def stop_live_room_list(data: dict, msg: bytes):
-    ...
+def stop_live_room_list(data: dict):
+    print(f'{get_time()} 收到包：{data["cmd"]}')
 
 
-def watched_change(data: dict, msg: bytes):
-    ...
+def watched_change(data: dict):
+    print(f'{get_time()} 收到包：{data["cmd"]}')
 
 
-def online_rank_count(data: dict, msg: bytes):
-    ...
+def online_rank_count(data: dict):
+    print(f'{get_time()} 收到包：{data["cmd"]}')
 
 
-def online_rank_v2(data: dict, msg: bytes):
-    ...
+def online_rank_v2(data: dict):
+    print(f'{get_time()} 收到包：{data["cmd"]}')
 
 
-def entry_effect(data: dict, msg: bytes):
-    ...
+def entry_effect(data: dict):
+    print(f'{get_time()} 收到包：{data["cmd"]}')
 
 
-def hot_rank_changed(data: dict, msg: bytes):
-    ...
+def hot_rank_changed(data: dict):
+    print(f'{get_time()} 收到包：{data["cmd"]}')
 
 
-def hot_rank_changed_v2(data: dict, msg: bytes):
-    ...
+def hot_rank_changed_v2(data: dict):
+    print(f'{get_time()} 收到包：{data["cmd"]}')
 
 
-def online_rank_top3(data: dict, msg: bytes):
-    ...
+def online_rank_top3(data: dict):
+    print(f'{get_time()} 收到包：{data["cmd"]}')
 
 
-def voice_join_list(data: dict, msg: bytes):
-    save_log(msg, f'_{data["cmd"]}')
-    ...
+def voice_join_list(data: dict):
+    print(f'{get_time()} 已保存：{data["cmd"]}')
+    return 'save'
 
 
-def voice_join_room_count_info(data: dict, msg: bytes):
-    save_log(msg, f'_{data["cmd"]}')
-    ...
+def voice_join_room_count_info(data: dict):
+    print(f'{get_time()} 已保存：{data["cmd"]}')
+    return 'save'
 
 
-def widget_banner(data: dict, msg: bytes):
-    save_log(msg, f'_{data["cmd"]}')
-    ...
+def widget_banner(data: dict):
+    print(f'{get_time()} 已保存：{data["cmd"]}')
+    return 'save'
 
 
-def common_notice_danmaku(data: dict, msg: bytes):
-    save_log(msg, f'_{data["cmd"]}')
-    ...
+def common_notice_danmaku(data: dict):
+    print(f'{get_time()} 已保存：{data["cmd"]}')
+    return 'save'
 
 
-def live(data: dict, msg: bytes):
-    save_log(msg, f'_{data["cmd"]}')
-    ...
+def live(data: dict):
+    print(f'{get_time()} 已保存：{data["cmd"]}')
+    return 'save'
 
 
-def preparing(data: dict, msg: bytes):
-    save_log(msg, f'_{data["cmd"]}')
-    ...
+def preparing(data: dict):
+    print(f'{get_time()} 已保存：{data["cmd"]}')
+    return 'save'
 
 
-def guard_buy(data: dict, msg: bytes):
-    ...
+def guard_buy(data: dict):
+    print(f'{get_time()} 收到包：{data["cmd"]}')
 
 
-def user_toast_msg(data: dict, msg: bytes):
-    ...
+def user_toast_msg(data: dict):
+    print(f'{get_time()} 收到包：{data["cmd"]}')
 
 
 cmd = {'DANMU_MSG': danmu_msg,  # 弹幕

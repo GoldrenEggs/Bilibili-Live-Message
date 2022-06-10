@@ -17,7 +17,8 @@ roomid = 4069612
 def handle_msg(msg: bytes):
     data = json.loads(str(msg, encoding='utf-8'))
     try:
-        cmd[data['cmd']](data, msg)
+        if cmd[data['cmd']](data) == 'save':
+            save_log(msg, f'_UnknownCmd_{data["cmd"]}')
     except KeyError:
         print(f'{get_time()}未知命令: {data["cmd"]}')
         save_log(msg, f'_UnknownCmd_{data["cmd"]}')
@@ -37,7 +38,7 @@ def send_auth(ws):
 def send_heartbeat(ws):
     while True:
         sleep(30)
-        print(f'{get_time()}发送心跳包')
+        print(f'{get_time()} 发送心跳包')
         global sequence
         sequence += 1
         ws.send(encode('', 2, sequence))
@@ -54,7 +55,7 @@ def recv_msg(ws):
             save_log(msg, ' 一个包多条命令')
         else:
             if header[3] == 3:  # 心跳包回复
-                print(f'{get_time()}心跳包回复: {unpack(">i", msg[16:])[0]}')
+                print(f'{get_time()} 心跳包回复: {unpack(">i", msg[16:])[0]}')
             elif header[3] == 5:  # 普通包(命令)
                 if header[2] == 0:  # 普通包不压缩
                     handle_msg(msg[16:])
@@ -89,7 +90,7 @@ def recv_msg(ws):
 def main():
     webs = websocket.create_connection("ws://broadcastlv.chat.bilibili.com:2244/sub")
     if send_auth(webs):
-        print(f'{get_time()}认证成功')
+        print(f'{get_time()} 认证成功')
         threading.Thread(target=send_heartbeat, args=(webs,), daemon=True).start()
         threading.Thread(target=recv_msg, args=(webs,), daemon=True).start()
     else:
