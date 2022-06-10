@@ -37,12 +37,11 @@ def send_auth(ws):
 # 发送心跳包
 def send_heartbeat(ws):
     while True:
-
+        sleep(30)
         print(f'{get_time()} 发送心跳包')
         global sequence
         sequence += 1
         ws.send(encode('', 2, sequence))
-        sleep(30)
 
 
 # 接收并处理传入消息
