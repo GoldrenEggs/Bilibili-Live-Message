@@ -4,9 +4,9 @@ from struct import unpack
 import json
 import threading
 from time import sleep
-from bilibili_web_header import Header
 
-from tool_function import *
+from bilibili_web_header import Header
+from tool_function import get_time, save_log, encode, split_msg
 from data_cmd import cmd
 
 sequence = 0
@@ -37,17 +37,21 @@ def send_auth(ws):
 # 发送心跳包
 def send_heartbeat(ws):
     while True:
-        sleep(30)
+
         print(f'{get_time()} 发送心跳包')
         global sequence
         sequence += 1
         ws.send(encode('', 2, sequence))
+        sleep(30)
 
 
 # 接收并处理传入消息
 def recv_msg(ws):
     while True:
         msg = ws.recv()
+        msg_list = split_msg(msg)
+        for msg1 in msg_list:
+            print(msg1[16:])
         header = Header(msg[:16])
         if header[0] != len(msg):  # 一个包多条命令
             # 没见过，见过再补
