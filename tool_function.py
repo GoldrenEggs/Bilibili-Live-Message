@@ -2,7 +2,7 @@ import time
 from struct import pack, unpack
 import zlib
 
-from bilibili_web_header import Header
+from bilibili_live_web_header import Header
 
 
 # 获取当前时间
@@ -33,14 +33,15 @@ def split_msg(message: bytes) -> list:
             recurse_split_msg(msg[header[0]:])
             return None
         if header[3] == 3:
-            msg_list.append(b'\x00\x00' + msg[4:16] + b'{"cmd":"HEART_BEAT_REPLY","data":{"count":' + msg[16:] + b'}}')
+            msg_list.append(b'\x00\x00\00\x00' + msg[4:16] + b'{"cmd":"HEART_BEAT_REPLY","data":{"count":'
+                            + bytes(str(unpack('>i', msg[16:])[0]), encoding='utf-8') + b'}}')
         elif header[3] == 5:
             if header[2] == 2:
                 recurse_split_msg(zlib.decompress(msg[16:]))
                 return None
             msg_list.append(msg)
         elif header[3] == 8:
-            msg_list.append(b'\x00\x00' + msg[4:16] + b'{"cmd":"AUTH_REPLY","data":' + msg[16:] + b'}')
+            msg_list.append(b'\x00\x00\x00\x00' + msg[4:16] + b'{"cmd":"AUTH_REPLY","data":' + msg[16:] + b'}')
 
     recurse_split_msg(message)
     return msg_list

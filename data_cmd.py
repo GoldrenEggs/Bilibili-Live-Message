@@ -105,12 +105,16 @@ def user_toast_msg(data: dict):
     print(f'{get_time()} 收到包：{data["cmd"]}')
 
 
+def live_interactive_game(data: dict):
+    print(f'{get_time()} 收到包：{data["cmd"]}')
+
+
 def heart_beat_reply(data: dict):
-    ...
+    print(f'{get_time()} 收到心跳包回复：{data["data"]["count"]}')
 
 
 def auth_reply(data: dict):
-    ...
+    print(f'{get_time()} 收到认证包回复：{data["data"]["code"]}')
 
 
 cmd = {'DANMU_MSG': danmu_msg,  # 弹幕
@@ -137,6 +141,7 @@ cmd = {'DANMU_MSG': danmu_msg,  # 弹幕
        'PREPARING': preparing,  # 未知，只有一个roomid
        'GUARD_BUY': guard_buy,  # 上船
        'USER_TOAST_MSG': user_toast_msg,  # 续费船
+       'LIVE_INTERACTIVE_GAME': live_interactive_game,  # 直播互动游戏，不知道是什么东西
 
        'HEART_BEAT_REPLY': heart_beat_reply,  # 自定义包：心跳包回复
        'AUTH_REPLY': auth_reply,  # 自定义包：认证包回复

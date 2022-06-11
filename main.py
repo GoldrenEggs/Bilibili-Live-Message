@@ -5,12 +5,13 @@ import json
 import threading
 from time import sleep
 
-from bilibili_web_header import Header
+from bilibili_live_web_header import Header
 from tool_function import get_time, save_log, encode, split_msg
 from data_cmd import cmd
 
 sequence = 0
-roomid = 4069612
+# roomid = 4069612  # GoldenEggs
+roomid = 9015372  # 不知道是谁
 
 
 # 处理接收到的消息
@@ -20,7 +21,7 @@ def handle_msg(msg: bytes):
         if cmd[data['cmd']](data) == 'save':
             save_log(msg, f'_UnknownCmd_{data["cmd"]}')
     except KeyError:
-        print(f'{get_time()}未知命令: {data["cmd"]}')
+        print(f'\033[31m{get_time()} 未知命令: {data["cmd"]}\033[0m')
         save_log(msg, f'_UnknownCmd_{data["cmd"]}')
 
 
@@ -36,16 +37,27 @@ def send_auth(ws):
 
 # 发送心跳包
 def send_heartbeat(ws):
+    sleep(3)
     while True:
-        sleep(30)
         print(f'{get_time()} 发送心跳包')
         global sequence
         sequence += 1
         ws.send(encode('', 2, sequence))
+        sleep(30)
+
+
+# 接收并处理消息
+def recv_msg(ws):
+    while True:
+        message = ws.recv()
+        msg_list = split_msg(message)
+        for msg in msg_list:
+            handle_msg(msg[16:])
 
 
 # 接收并处理传入消息
-def recv_msg(ws):
+# 目前没用，可以删除
+def recv_msg1(ws):
     while True:
         msg = ws.recv()
         msg_list = split_msg(msg)
