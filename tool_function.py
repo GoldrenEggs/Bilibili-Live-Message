@@ -53,3 +53,4 @@ def write_reference(d: dict):
     if not os.path.isfile(f'Logs/Json Reference/{d["cmd"]}.json'):
         with open(f'Logs/Json Reference/{d["cmd"]}.json', 'w', encoding='utf-8') as f:
             f.write(json.dumps(d, ensure_ascii=False, indent=4))
+        print('\033[31m新增json参考文本已写入到文件\033[0m')
