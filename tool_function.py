@@ -1,6 +1,8 @@
 import time
 from struct import pack, unpack
 import zlib
+import json
+import os.path
 
 from bilibili_live_web_header import Header
 
@@ -12,7 +14,7 @@ def get_time():
 
 # 保存消息
 def save_log(msg: bytes, info: str = ''):
-    with open(time.strftime(f'logs/%Y-%m-%d_%H-%M-%S{info}', time.localtime()), 'wb') as f:
+    with open(time.strftime(f'Logs/%Y-%m-%d_%H-%M-%S{info}', time.localtime()), 'wb') as f:
         f.write(msg)
 
 
@@ -45,3 +47,9 @@ def split_msg(message: bytes) -> list:
 
     recurse_split_msg(message)
     return msg_list
+
+
+def write_reference(d: dict):
+    if not os.path.isfile(f'Logs/Json Reference/{d["cmd"]}.json'):
+        with open(f'Logs/Json Reference/{d["cmd"]}.json', 'w', encoding='utf-8') as f:
+            f.write(json.dumps(d, ensure_ascii=False, indent=4))

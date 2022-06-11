@@ -1,12 +1,14 @@
-import websocket
 import zlib
 from struct import unpack
 import json
 import threading
 from time import sleep
+import os.path
+
+import websocket
 
 from bilibili_live_web_header import Header
-from tool_function import get_time, save_log, encode, split_msg
+from tool_function import get_time, save_log, encode, split_msg, write_reference
 from data_cmd import cmd
 
 sequence = 0
@@ -18,8 +20,8 @@ roomid = 9015372  # 不知道是谁
 def handle_msg(msg: bytes):
     data = json.loads(str(msg, encoding='utf-8'))
     try:
-        if cmd[data['cmd']](data) == 'save':
-            save_log(msg, f'_UnknownCmd_{data["cmd"]}')
+        write_reference(data)
+        cmd[data['cmd']](data)
     except KeyError:
         print(f'\033[31m{get_time()} 未知命令: {data["cmd"]}\033[0m')
         save_log(msg, f'_UnknownCmd_{data["cmd"]}')

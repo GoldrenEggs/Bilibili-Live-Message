@@ -15,8 +15,7 @@ def combo_send(data: dict):
 
 
 def notice_msg(data: dict):
-    print(f'{get_time()} 已保存：{data["cmd"]}')
-    return 'save'
+    print(f'{get_time()} 收到包：{data["cmd"]}')
 
 
 def super_chat_message(data: dict):
@@ -68,33 +67,27 @@ def online_rank_top3(data: dict):
 
 
 def voice_join_list(data: dict):
-    print(f'{get_time()} 已保存：{data["cmd"]}')
-    return 'save'
+    print(f'{get_time()} 收到包：{data["cmd"]}')
 
 
 def voice_join_room_count_info(data: dict):
-    print(f'{get_time()} 已保存：{data["cmd"]}')
-    return 'save'
+    print(f'{get_time()} 收到包：{data["cmd"]}')
 
 
 def widget_banner(data: dict):
-    print(f'{get_time()} 已保存：{data["cmd"]}')
-    return 'save'
+    print(f'{get_time()} 收到包：{data["cmd"]}')
 
 
 def common_notice_danmaku(data: dict):
-    print(f'{get_time()} 已保存：{data["cmd"]}')
-    return 'save'
+    print(f'{get_time()} 收到包：{data["cmd"]}')
 
 
 def live(data: dict):
-    print(f'{get_time()} 已保存：{data["cmd"]}')
-    return 'save'
+    print(f'{get_time()} 收到包：{data["cmd"]}')
 
 
 def preparing(data: dict):
-    print(f'{get_time()} 已保存：{data["cmd"]}')
-    return 'save'
+    print(f'{get_time()} 收到包：{data["cmd"]}')
 
 
 def guard_buy(data: dict):

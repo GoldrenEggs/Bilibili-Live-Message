@@ -4,7 +4,7 @@ from time import sleep
 
 
 class Log:
-    def __init__(self, path: str = 'Log/' + datetime.datetime.now().strftime("%Y-%m-%d %H-%M-%S") + '.log'):
+    def __init__(self, path: str = 'Logs/' + datetime.datetime.now().strftime("%Y-%m-%d %H-%M-%S") + '.log'):
         self.path = path
         self.save_interval = 5.0
         self.__temp_logs = []
