@@ -1,4 +1,4 @@
-from tool_function import *
+from tool_function import get_time
 
 
 def danmu_msg(data: dict):
