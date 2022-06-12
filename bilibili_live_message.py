@@ -19,7 +19,7 @@ def time_print(msg: str):
 
 
 # 为消息添加头部
-def encode(msg: str, op: int, seq: int) -> str:
+def encode(msg: str, op: int, seq: int) -> bytes:
     data = msg.encode('utf-8')
     packet_len = pack('>i', 16 + len(data))
     return packet_len + pack('>h', 16) + pack('>h', 0) + pack('>i', op) + pack('>i', seq) + data
@@ -153,36 +153,38 @@ class Message:
 
 
 class MessageCmd:
-    def __init__(self):
-        self.cmd = {'DANMU_MSG': self.__get_pack,  # 弹幕
-                    'SEND_GIFT': self.__get_pack,  # 礼物
-                    'COMBO_SEND': self.__get_pack,  # 礼物连击
-                    'NOTICE_MSG': self.__get_pack,  # 舰长续费（可能）
-                    'SUPER_CHAT_MESSAGE': self.__get_pack,  # 氪金弹幕
-                    'SUPER_CHAT_MESSAGE_JPN': self.__get_pack,  # 也是氪金弹幕
-                    'ROOM_REAL_TIME_MESSAGE_UPDATE': self.__get_pack,  # 粉丝变化
-                    'INTERACT_WORD': self.__get_pack,  # 直播间专属标签（可能）
-                    'STOP_LIVE_ROOM_LIST': self.__get_pack,  # 停止房间列表，作用未知
-                    'WATCHED_CHANGE': self.__get_pack,  # 直播观看人数变化
-                    'ONLINE_RANK_COUNT': self.__get_pack,  # 氪金榜
-                    'ONLINE_RANK_V2': self.__get_pack,  # 氪金榜
-                    'ENTRY_EFFECT': self.__get_pack,  # 入场特效（可能）
-                    'HOT_RANK_CHANGED': self.__get_pack,  # 主播热度
-                    'HOT_RANK_CHANGED_V2': self.__get_pack,  # 主播热度
-                    'ONLINE_RANK_TOP3': self.__get_pack,  # 氪金榜前三变动
-                    'VOICE_JOIN_LIST': self.__get_pack,  # 未知
-                    'VOICE_ROOM_COUNT_INFO': self.__get_pack,  # 未知
-                    'WIDGET_BANNER': self.__get_pack,  # bilibili活动横幅（可能）
-                    'COMMON_NOTICE_DANMAKU': self.__get_pack,  # 未知
-                    'LIVE': self.__get_pack,  # 未知
-                    'PREPARING': self.__get_pack,  # 未知，只有一个roomid
-                    'GUARD_BUY': self.__get_pack,  # 上船
-                    'USER_TOAST_MSG': self.__get_pack,  # 续费船
-                    'LIVE_INTERACTIVE_GAME': self.__get_pack,  # 直播互动游戏，不知道是什么东西
+    cmd_tuple = (
+        'DANMU_MSG',  # 弹幕
+        'SEND_GIFT',  # 礼物
+        'COMBO_SEND',  # 礼物连击
+        'NOTICE_MSG',  # 舰长续费（可能）
+        'SUPER_CHAT_MESSAGE',  # 氪金弹幕
+        'SUPER_CHAT_MESSAGE_JPN',  # 也是氪金弹幕
+        'ROOM_REAL_TIME_MESSAGE_UPDATE',  # 粉丝变化
+        'INTERACT_WORD',  # 直播间专属标签
+        'STOP_LIVE_ROOM_LIST',  # 停止房间列表，作用未知
+        'WATCHED_CHANGE',  # 直播观看人数变化
+        'ONLINE_RANK_COUNT',  # 氪金榜
+        'ONLINE_RANK_V2',  # 也是氪金榜
+        'ENTRY_EFFECT',  # 入场特效
+        'HOT_RANK_CHANGED',  # 主播热度
+        'HOT_RANK_CHANGED_V2',  # 主播热度
+        'ONLINE_RANK_TOP3',  # 氪金榜前三变化
+        'VOICE_JOIN_LIST',  # 未知
+        'VOICE_ROOM_COUNT_INFO',  # 未知
+        'WIDGET_BANNER',  # 活动横幅
+        'COMMON_NOTICE_DANMAKU',  # 未知
+        'LIVE',  # 未知
+        'PREPARING',  # 未知
+        'GUARD_BUY',  # 上船
+        'USER_TOAST_MSG',  # 续费船
+        'LIVE_INTERACTIVE_GAME',  # 直播互动游戏，未知
+    )
 
-                    'HEART_BEAT_REPLY': self.__heart_beat_reply,  # 自定义包：心跳包回复
-                    'AUTH_REPLY': self.__get_pack,  # 自定义包：认证包回复
-                    }
+    def __init__(self):
+        self.cmd = {key: self.__get_pack for key in self.cmd_tuple}
+        self.cmd['HEART_BEAT_REPLY'] = self.__heart_beat_reply
+        self.cmd['AUTH_REPLY'] = self.__auth_reply
         self.console_get_pack_print = False
         self.console_link_print = False
 
