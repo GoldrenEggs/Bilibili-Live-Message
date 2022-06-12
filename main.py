@@ -1,74 +1,36 @@
-import zlib
-from struct import unpack
-import json
-import threading
-from time import sleep
-import os.path
-
-import websocket
-
-from bilibili_live_web_header import Header
-from tool_function import get_time, save_log, encode, split_msg, write_reference
-from data_cmd import cmd
-
-sequence = 0
-# roomid = 4069612  # GoldenEggs
-roomid = 9015372  # 不知道是谁
-
-
-# 处理接收到的消息
-def handle_msg(msg: bytes):
-    data = json.loads(str(msg, encoding='utf-8'))
-    try:
-        write_reference(data)
-        cmd[data['cmd']](data)
-    except KeyError:
-        print(f'\033[31m{get_time()} 未知命令: {data["cmd"]}\033[0m')
-        # save_log(msg, f'_UnknownCmd_{data["cmd"]}')
-
-
-# 发送认证包
-def send_auth(ws):
-    global sequence
-    sequence += 1
-    ws.send(encode('{"roomid":%d}' % roomid, 7, sequence))
-    return True if ws.recv()[16:] == b'{"code":0}' else False
-
-
-# 发送心跳包
-def send_heartbeat(ws):
-    sleep(3)
-    while True:
-        print(f'{get_time()} 发送心跳包')
-        global sequence
-        sequence += 1
-        ws.send(encode('', 2, sequence))
-        sleep(30)
-
-
-# 接收并处理消息
-def recv_msg(ws):
-    while True:
-        message = ws.recv()
-        msg_list = split_msg(message)
-        for msg in msg_list:
-            handle_msg(msg[16:])
+from bilibili_live_message import Message, time_print
 
 
 def main():
-    webs = websocket.create_connection("ws://broadcastlv.chat.bilibili.com:2244/sub")
-    if send_auth(webs):
-        print(f'{get_time()} 认证成功')
-        threading.Thread(target=send_heartbeat, args=(webs,), daemon=True).start()
-        threading.Thread(target=recv_msg, args=(webs,), daemon=True).start()
-    else:
-        print('认证失败')
-        webs.close()
-        return
+    def danmu_msg(msg: dict):  # 弹幕消息处理方法
+        time_print(f'{msg["info"][2][1]}: {msg["info"][1]}')
+
+    def send_gift(msg: dict):  # 礼物消息处理方法
+        time_print(f'{msg["data"]["uname"]} '
+                   f'{msg["data"]["action"]}{msg["data"]["giftName"]} x{msg["data"]["num"]}')
+
+    def guard_buy(msg: dict):  # 上船消息处理方法
+        time_print(f'{msg["data"]["username"]} 上了贼船并成为了 {msg["data"]["gift_name"]}')
+
+    message = Message(24065)  # 设置直播间号
+    message.console_print('Link', 'Error', 'GetPack')  # 设置需要打印的消息类型，Link：链接信息，Error：错误信息，GetPack：获取包信息
+
+    message.cmd['DANMU_MSG'] = danmu_msg  # 设置弹幕消息处理方法
+    message.cmd.set_function('SEND_GIFT', send_gift)  # 设置礼物消息处理方法
+
+    cmd_dict = {
+        'INTERACT_WORD': lambda msg: time_print(f'{msg["data"]["uname"]} 进入了直播间'),  # 将进入直播间消息处理方法保存到字典中
+        'GUARD_BUY': guard_buy,  # 将上船消息处理方法保存到字典中
+    }
+
+    message.cmd.set_function_dict(cmd_dict)  # 用字典的方法设置消息处理方法
+
+    message.start()  # 开始爬取并处理直播间消息
     while True:
-        data_cmd = input()
-        if data_cmd == 'q':
-            return
+        cmd = input()
+        if cmd == 'q':
+            message.stop()
+            break
 
 
 if __name__ == '__main__':
