@@ -4,6 +4,8 @@
 
 消息的json格式请参考 [PackJson](PackJson)，如果你知道了某个json中的内容代表了什么，麻烦告诉我一声
 
+`__handle_msg` 函数中有一行注释掉的代码，把他取消注释可以将未知的包保存在文件中，如果发现新的CMD也麻烦告诉我一声
+
 目前 [log.py](log.py) 有问题，不能用，我还没办法安全结束进程
 
 日后准备添加api.py
@@ -54,7 +56,16 @@
 
 ---
 
+**其他**
+
+- 可以使用链式表达，例：
+
+    `Message.console_print('Link).set_function('DANMU_MSG': function).start()`
+
+---
+
 **注意事项**
 
 1. `HEART_BEAT_REPLY` 与 `AUTH_REPLY` 是本项目自定义的指令，请不要作为其他项目的参考，二者皆不存在于 bilibili 官方 api 回复中。
 2. 别忘了导入 `websocket` 与 `websocket-client` 库。
+3. [bilibili_live_message](bilibili_live_message.py) 中的 `MessageCmd` 类还没写全，你可以自己添加一下，在 `cmd_tuple` 中添加新的字符串就行了。
