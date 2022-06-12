@@ -1,10 +1,10 @@
-## BilibiliLiveDanmaku
+# Bilibili Live Danmaku
 
 ---
 
 使用方法请参考 [main.py](main.py)，或者看下文
 
-接收到消息的json格式请参考 [PackJson](PackJson)
+消息的json格式请参考 [PackJson](PackJson)，如果你知道了某个json中的内容代表了什么，麻烦告诉我一声
 
 目前 [log.py](log.py) 有问题，不能用，我还没办法安全结束进程
 
@@ -38,3 +38,10 @@
    例：`message.console_print('Link','GetPack')`
 6. 使用 `Message.start()` 方法开始获取直播间信息，本类会创建一个子线程执行，不产生阻塞。
 7. 使用 `Message.stop()` 方法停止获取信息。
+
+---
+
+**注意事项**
+
+1. `HEART_BEAT_REPLY` 与 `AUTH_REPLY` 是本项目自定义的指令，请不要作为其他项目的参考，二者皆不存在于 bilibili 官方 api 回复中。
+2. 别忘了导入 `websocket` 与 `websocket-client` 库。
