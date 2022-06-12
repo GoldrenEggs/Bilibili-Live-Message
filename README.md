@@ -10,7 +10,7 @@
 
 ---
 
-**使用方法：**
+**使用方法**
 
 1. 导入Message类 `from bilibili_live_message import Message`
 2. 创建Message类对象，并填入房间号 `message = Message(123)`
@@ -36,6 +36,21 @@
    例：`message.console_print('Link','GetPack')`
 6. 使用 `Message.start()` 方法开始获取直播间信息，本类会创建一个子线程执行，不产生阻塞。
 7. 使用 `Message.stop()` 方法停止获取信息。
+
+---
+
+**已知消息类型**
+
+- [DANMU_MSG](PackJson/DANMU_MSG.json)：弹幕
+- [INTERACT_WORD](PackJson/INTERACT_WORD.json)：入场消息
+- [WATCHED_CHANGE](PackJson/WATCHED_CHANGE.json)：观看过的人数
+- [SEND_GIFT](PackJson/SEND_GIFT.json)：礼物
+- [COMBO_SEND](PackJson/COMBO_SEND.json)：连续投喂礼物
+- [GUARD_BUY](PackJson/GUARD_BUY.json)：上船
+- [USER_TOAST_MSG](PackJson/USER_TOAST_MSG.json)：续费船
+- [ENTRY_EFFECT](PackJson/ENTRY_EFFECT.json)：入场特效
+- [SUPER_CHAT_MESSAGE](PackJson/SUPER_CHAT_MESSAGE.json)：醒目留言
+- [WIDGET_BANNER](PackJson/WIDGET_BANNER.json)：活动横幅
 
 ---
 
