@@ -2,15 +2,17 @@
 
 ---
 
-使用方法请参考 [main.py](main.py)，或者看下文。
+使用方法请参考 [main.py](main.py)，或者看下文
 
-目前 [log.py](log.py) 有问题，不能用，我没办法安全结束进程。
+接收到消息的json格式请参考 [PackJson](PackJson)
 
-日后准备添加api.py。
+目前 [log.py](log.py) 有问题，不能用，我还没办法安全结束进程
+
+日后准备添加api.py
 
 ---
 
-**使用方法**：
+**使用方法：**
 
 1. 导入Message类 `from bilibili_live_message import Message`
 2. 创建Message类对象，并填入房间号 `message = Message(123)`
