@@ -1,7 +1,5 @@
 # Bilibili Live Message
 
----
-
 使用方法请参考 [main.py](main.py)，或者看下文
 
 消息的json格式请参考 [PackJson](PackJson)，如果你知道了某个json中的内容代表了什么，麻烦告诉我一声
