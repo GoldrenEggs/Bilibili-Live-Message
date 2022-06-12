@@ -1,6 +1,8 @@
 from bilibili_live_message import Message, time_print
 
 
+# 使用方法参考
+# 你需要安装第三方库 websocket 与 websocket-client
 def main():
     def danmu_msg(msg: dict):  # 弹幕消息处理方法
         time_print(f'{msg["info"][2][1]}: {msg["info"][1]}')
@@ -12,7 +14,7 @@ def main():
     def guard_buy(msg: dict):  # 上船消息处理方法
         time_print(f'{msg["data"]["username"]} 上了贼船并成为了 {msg["data"]["gift_name"]}')
 
-    message = Message(24065)  # 设置直播间号
+    message = Message(24065)  # 创建直播间消息类并设置直播间房间号
     message.console_print('Link', 'Error', 'GetPack')  # 设置需要打印的消息类型，Link：链接信息，Error：错误信息，GetPack：获取包信息
 
     message.cmd['DANMU_MSG'] = danmu_msg  # 设置弹幕消息处理方法

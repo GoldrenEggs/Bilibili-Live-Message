@@ -93,7 +93,7 @@ class Message:
     def __handle_msg(self, msg: bytes):
         msg_dict = json.loads(str(msg, encoding='utf-8'))
         try:
-            write_reference(msg_dict)
+            # write_reference(msg_dict)
             self.cmd[msg_dict['cmd']](msg_dict)
         except KeyError:
             if self.__console_error_print:
