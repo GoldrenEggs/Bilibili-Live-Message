@@ -1,0 +1,33 @@
+{
+    "cmd": "WIDGET_BANNER",
+    "data": {
+        "timestamp": 1654976934,
+        "widget_list": {
+            "205": {
+                "id": 205,
+                "title": "BLS限时红包任务",
+                "cover": "",
+                "web_cover": "",
+                "tip_text": "限时红包任务",
+                "tip_text_color": "#FFFFFF",
+                "tip_bottom_color": "#56DDF2",
+                "jump_url": "https://live.bilibili.com/activity/live-activity-battle/index.html?app_name=bls_red_envelope&is_live_half_webview=1&hybrid_rotate_d=1&hybrid_half_ui=1,3,100p,70p,0,0,0,0,12,0;2,2,375,100p,0,0,0,0,12,0;3,3,100p,70p,0,0,0,0,12,0;4,2,375,100p,0,0,0,0,12,0;5,3,100p,70p,0,0,0,0,12,0;6,3,100p,70p,0,0,0,0,12,0;7,3,100p,70p,0,0,0,0,12,0;8,3,100p,70p,0,0,0,0,12,0&room_id=9015372&uid=8454397#/",
+                "url": "",
+                "stay_time": 5,
+                "site": 1,
+                "platform_in": [
+                    "live",
+                    "blink",
+                    "live_link",
+                    "web",
+                    "pc_link"
+                ],
+                "type": 1,
+                "band_id": 100542,
+                "sub_key": "",
+                "sub_data": "%7B%22task_status%22%3A0%2C%22current_val%22%3A252%2C%22target_val%22%3A1300%2C%22timeout%22%3A344%2C%22reward_price%22%3A10%7D",
+                "is_add": true
+            }
+        }
+    }
+}

@@ -1,0 +1,12 @@
+{
+    "cmd": "ONLINE_RANK_TOP3",
+    "data": {
+        "dmscore": 112,
+        "list": [
+            {
+                "msg": "恭喜 <%衡山师弟祝小芸%> 成为高能榜",
+                "rank": 3
+            }
+        ]
+    }
+}

@@ -1,0 +1,11 @@
+{
+    "cmd": "ROOM_BLOCK_MSG",
+    "data": {
+        "dmscore": 30,
+        "operator": 1,
+        "uid": 101528912,
+        "uname": "抢只企鹅去卖钱"
+    },
+    "uid": "101528912",
+    "uname": "抢只企鹅去卖钱"
+}

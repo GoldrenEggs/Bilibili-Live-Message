@@ -1,0 +1,21 @@
+{
+    "cmd": "LIVE_INTERACTIVE_GAME",
+    "data": {
+        "type": 2,
+        "uid": 502849207,
+        "uname": "QQ咩咩好喝到咩瞨茶",
+        "uface": "",
+        "gift_id": 0,
+        "gift_name": "",
+        "gift_num": 0,
+        "price": 0,
+        "paid": false,
+        "msg": "嗯嗯",
+        "fans_medal_level": 26,
+        "guard_level": 3,
+        "timestamp": 1654975373,
+        "anchor_lottery": null,
+        "pk_info": null,
+        "anchor_info": null
+    }
+}

@@ -1,0 +1,42 @@
+{
+    "cmd": "SUPER_CHAT_MESSAGE_JPN",
+    "data": {
+        "id": "4258549",
+        "uid": "109319072",
+        "price": 30,
+        "rate": 1000,
+        "message": "hana等会真的唱 向天再借五百年吗",
+        "message_jpn": "",
+        "is_ranked": 1,
+        "background_image": "https://i0.hdslb.com/bfs/live/a712efa5c6ebc67bafbe8352d3e74b820a00c13e.png",
+        "background_color": "#EDF5FF",
+        "background_icon": "",
+        "background_price_color": "#7497CD",
+        "background_bottom_color": "#2A60B2",
+        "ts": 1654978021,
+        "token": "3A85D663",
+        "medal_info": null,
+        "user_info": {
+            "uname": "AyeUniCute",
+            "face": "http://i2.hdslb.com/bfs/face/de172ea5b6f3d09769fe3b0e5e6e57c02350d49d.jpg",
+            "face_frame": "",
+            "guard_level": 0,
+            "user_level": 0,
+            "level_color": "#969696",
+            "is_vip": 0,
+            "is_svip": 0,
+            "is_main_vip": 1,
+            "title": "0",
+            "manager": 0
+        },
+        "time": 60,
+        "start_time": 1654978021,
+        "end_time": 1654978081,
+        "gift": {
+            "num": 1,
+            "gift_id": 12000,
+            "gift_name": "醒目留言"
+        }
+    },
+    "roomid": "9015372"
+}

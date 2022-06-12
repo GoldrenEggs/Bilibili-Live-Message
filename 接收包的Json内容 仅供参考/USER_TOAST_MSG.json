@@ -1,0 +1,25 @@
+{
+    "cmd": "USER_TOAST_MSG",
+    "data": {
+        "anchor_show": true,
+        "color": "#00D1F1",
+        "dmscore": 90,
+        "effect_id": 397,
+        "end_time": 1655038696,
+        "guard_level": 3,
+        "is_show": 0,
+        "num": 1,
+        "op_type": 3,
+        "payflow_id": "2206122058068912100512305",
+        "price": 138000,
+        "role_name": "舰长",
+        "start_time": 1655038696,
+        "svga_block": 0,
+        "target_guard_count": 6630,
+        "toast_msg": "<%jw623793045%> 自动续费了舰长",
+        "uid": 484120051,
+        "unit": "月",
+        "user_show": true,
+        "username": "jw623793045"
+    }
+}

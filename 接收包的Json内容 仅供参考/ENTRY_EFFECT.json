@@ -1,0 +1,35 @@
+{
+    "cmd": "ENTRY_EFFECT",
+    "data": {
+        "id": 4,
+        "uid": 263290240,
+        "target_id": 8454397,
+        "mock_effect": 0,
+        "face": "https://i1.hdslb.com/bfs/face/55189f766d2b3c47c3a3b60c8942ba0dca3a7761.jpg",
+        "privilege_type": 3,
+        "copy_writing": "欢迎舰长 <%挖矿天才策某人%> 进入直播间",
+        "copy_color": "#ffffff",
+        "highlight_color": "#E6FF00",
+        "priority": 1,
+        "basemap_url": "https://i0.hdslb.com/bfs/live/mlive/11a6e8eb061c3e715d0a6a2ac0ddea2faa15c15e.png",
+        "show_avatar": 1,
+        "effective_time": 2,
+        "web_basemap_url": "https://i0.hdslb.com/bfs/live/mlive/11a6e8eb061c3e715d0a6a2ac0ddea2faa15c15e.png",
+        "web_effective_time": 2,
+        "web_effect_close": 0,
+        "web_close_time": 0,
+        "business": 1,
+        "copy_writing_v2": "欢迎 <^icon^> 舰长 <%挖矿天才策某人%> 进入直播间",
+        "icon_list": [
+            3
+        ],
+        "max_delay_time": 7,
+        "trigger_time": 1654975541620105682,
+        "identities": 33,
+        "effect_silent_time": 300,
+        "effective_time_new": 0,
+        "web_dynamic_url_webp": "",
+        "web_dynamic_url_apng": "",
+        "mobile_dynamic_url_webp": ""
+    }
+}
