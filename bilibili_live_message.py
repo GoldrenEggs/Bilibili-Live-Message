@@ -62,7 +62,7 @@ class Message:
     sequence = 0
 
     def __init__(self, roomid: int):
-        self.webs = websocket.create_connection("ws://broadcastlv.chat.bilibili.com:2244/sub")
+        self.webs = websocket
         self.roomid = roomid
         self.cmd = MessageCmd()
         self.heart_beat_thread = None
@@ -193,6 +193,9 @@ class MessageCmd:
 
     def __setitem__(self, key: str, value):
         self.cmd[key] = value
+
+    def __delitem__(self, key):
+        self.cmd[key] = self.__get_pack
 
     def __get_pack(self, msg_dict: dict):
         if self.console_get_pack_print:
