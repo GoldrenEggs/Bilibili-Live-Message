@@ -62,7 +62,7 @@ class Message:
     sequence = 0
 
     def __init__(self, roomid: int):
-        self.webs = websocket
+        self.webs = websocket.create_connection("ws://broadcastlv.chat.bilibili.com:2244/sub")
         self.roomid = roomid
         self.cmd = MessageCmd()
         self.heart_beat_thread = None
