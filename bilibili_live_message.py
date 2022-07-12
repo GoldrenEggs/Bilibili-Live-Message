@@ -54,7 +54,8 @@ def split_msg(message: bytes) -> list:
 def write_reference(d: dict):
     if not isfile(f'Logs/Json Reference/{d["cmd"]}.json'):
         with open(f'Logs/Json Reference/{d["cmd"]}.json', 'w', encoding='utf-8') as f:
-            f.write(json.dumps(d, ensure_ascii=False, indent=4))
+            json.dump(d, f, ensure_ascii=False, indent=4)
+            # f.write(json.dumps(d, ensure_ascii=False, indent=4))
         print('\033[34m新增json参考文本已写入到文件\033[0m')
 
 
@@ -153,36 +154,45 @@ class Message:
 
 
 class MessageCmd:
-    cmd_tuple = (
-        'DANMU_MSG',  # 弹幕
-        'SEND_GIFT',  # 礼物
-        'COMBO_SEND',  # 礼物连击
-        'NOTICE_MSG',  # 舰长续费（可能）
-        'SUPER_CHAT_MESSAGE',  # 氪金弹幕
-        'SUPER_CHAT_MESSAGE_JPN',  # 也是氪金弹幕
-        'ROOM_REAL_TIME_MESSAGE_UPDATE',  # 粉丝变化
-        'INTERACT_WORD',  # 直播间专属标签
-        'STOP_LIVE_ROOM_LIST',  # 停止房间列表，作用未知
-        'WATCHED_CHANGE',  # 直播观看人数变化
-        'ONLINE_RANK_COUNT',  # 氪金榜
-        'ONLINE_RANK_V2',  # 也是氪金榜
+    cmd_names = (
+        'COMBO_SEND',  # 连续礼物
+        'COMMON_NOTICE_DANMAKU',
+        'DANMU_MSG',  # 弹幕消息
         'ENTRY_EFFECT',  # 入场特效
-        'HOT_RANK_CHANGED',  # 主播热度
-        'HOT_RANK_CHANGED_V2',  # 主播热度
-        'ONLINE_RANK_TOP3',  # 氪金榜前三变化
-        'VOICE_JOIN_LIST',  # 未知
-        'VOICE_ROOM_COUNT_INFO',  # 未知
-        'WIDGET_BANNER',  # 活动横幅
-        'COMMON_NOTICE_DANMAKU',  # 未知
-        'LIVE',  # 未知
-        'PREPARING',  # 未知
+        'FULL_SCREEN_SPECIAL_EFFECT',
         'GUARD_BUY',  # 上船
-        'USER_TOAST_MSG',  # 续费船
-        'LIVE_INTERACTIVE_GAME',  # 直播互动游戏，未知
+        'HOT_RANK_CHANGED',
+        'HOT_RANK_CHANGED_V2',
+        'HOT_RANK_SETTLEMENT',
+        'HOT_RANK_SETTLEMENT_V2',
+        'HOT_ROOM_NOTIFY',
+        'INTERACT_WORD',  # 入场消息
+        'LIVE_INTERACTIVE_GAME',
+        'NOTICE_MSG',  # 昂贵礼物投喂全直播间通知
+        'ONLINE_RANK_COUNT',
+        'ONLINE_RANK_TOP3',
+        'ONLINE_RANK_V2',
+        'PREPARING',
+        'ROOM_BLOCK_MSG',  # 禁言（大概）
+        'ROOM_REAL_TIME_MESSAGE_UPDATE',
+        'SEND_GIFT',  # 礼物
+        'SPECIAL_GIFT',  # 特殊礼物
+        'STOP_LIVE_ROOM_LIST',
+        'SUPER_CHAT_MESSAGE',  # 醒目留言
+        'SUPER_CHAT_MESSAGE_DELETE',  # 删除醒目留言
+        'SUPER_CHAT_MESSAGE_JPN',  # 还是醒目留言，但是汉奸
+        'USER_TOAST_MSG',  # 自动续费大航海（可能）
+        'VOICE_JOIN_LIST',
+        'VOICE_JOIN_ROOM_COUNT_INFO',
+        'VOICE_JOIN_STATUS',
+        'WATCHED_CHANGE',  # 观看人数变化
+        'WIDGET_BANNER',  # 活动横幅（可能）
+        'AUTH_REPLY',  # 认证包回复（自定义包回复）
+        'HEART_BEAT_REPLY',  # 心跳包回复（自定义包回复）
     )
 
     def __init__(self):
-        self.cmd = {key: self.__get_pack for key in self.cmd_tuple}
+        self.cmd = {key: self.__get_pack for key in self.cmd_names}
         self.cmd['HEART_BEAT_REPLY'] = self.__heart_beat_reply
         self.cmd['AUTH_REPLY'] = self.__auth_reply
         self.console_get_pack_print = False
