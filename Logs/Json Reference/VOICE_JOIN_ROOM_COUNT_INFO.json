@@ -1,0 +1,13 @@
+{
+    "cmd": "VOICE_JOIN_ROOM_COUNT_INFO",
+    "data": {
+        "cmd": "",
+        "room_id": 9015372,
+        "root_status": 1,
+        "room_status": 1,
+        "apply_count": 1,
+        "notify_count": 0,
+        "red_point": 1
+    },
+    "room_id": 9015372
+}

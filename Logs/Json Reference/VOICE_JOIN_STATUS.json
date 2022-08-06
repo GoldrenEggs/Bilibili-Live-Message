@@ -1,0 +1,17 @@
+{
+    "cmd": "VOICE_JOIN_STATUS",
+    "data": {
+        "room_id": 9015372,
+        "status": 1,
+        "channel": "voice1267645",
+        "channel_type": "voice",
+        "uid": 502849207,
+        "user_name": "QQ咩咩好喝到咩瞨茶",
+        "head_pic": "http://i1.hdslb.com/bfs/face/f0dc2c9903cc3ff33e456214afef4ad5beb8d0b3.jpg",
+        "guard": 3,
+        "start_at": 1654975685,
+        "current_time": 1654975685,
+        "web_share_link": "https://live.bilibili.com/h5/9015372"
+    },
+    "roomid": 9015372
+}

@@ -1,0 +1,14 @@
+{
+    "cmd": "HOT_RANK_SETTLEMENT_V2",
+    "data": {
+        "rank": 1,
+        "uname": "向晚大魔王",
+        "face": "http://i0.hdslb.com/bfs/face/566078c52b408571d8ae5e3bcdf57b2283024c27.jpg",
+        "timestamp": 1655038500,
+        "icon": "https://i0.hdslb.com/bfs/live/cb2e160ac4f562b347bb5ae6e635688ebc69580f.png",
+        "area_name": "热门",
+        "url": "https://live.bilibili.com/p/html/live-app-hotrank/result.html?is_live_half_webview=1&hybrid_half_ui=1,5,250,200,f4eefa,0,30,0,0,0;2,5,250,200,f4eefa,0,30,0,0,0;3,5,250,200,f4eefa,0,30,0,0,0;4,5,250,200,f4eefa,0,30,0,0,0;5,5,250,200,f4eefa,0,30,0,0,0;6,5,250,200,f4eefa,0,30,0,0,0;7,5,250,200,f4eefa,0,30,0,0,0;8,5,250,200,f4eefa,0,30,0,0,0&areaId=0&cache_key=77060bc3444139a235cf9b014738540e",
+        "cache_key": "77060bc3444139a235cf9b014738540e",
+        "dm_msg": "恭喜主播 <% 向晚大魔王 %> 荣登限时热门榜总榜榜首! 即将获得热门流量推荐哦！"
+    }
+}

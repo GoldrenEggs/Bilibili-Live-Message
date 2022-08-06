@@ -36,7 +36,7 @@ def split_msg(message: bytes) -> list:
             iterate_msg(msg[header[0]:])
             return None
         if header[3] == 3:
-            msg_list.append(b'\x00\x00\00\x00' + msg[4:16] + b'{"cmd":"HEART_BEAT_REPLY","data":{"count":'
+            msg_list.append(b'\x00\x00\00\x00' + msg[4:16] + b'{"cmd":"HEART_BEAT_REPLY","Data":{"count":'
                             + bytes(str(unpack('>i', msg[16:])[0]), encoding='utf-8') + b'}}')
         elif header[3] == 5:
             if header[2] == 2:
@@ -44,7 +44,7 @@ def split_msg(message: bytes) -> list:
                 return None
             msg_list.append(msg)
         elif header[3] == 8:
-            msg_list.append(b'\x00\x00\x00\x00' + msg[4:16] + b'{"cmd":"AUTH_REPLY","data":' + msg[16:] + b'}')
+            msg_list.append(b'\x00\x00\x00\x00' + msg[4:16] + b'{"cmd":"AUTH_REPLY","Data":' + msg[16:] + b'}')
 
     iterate_msg(message)
     return msg_list
@@ -213,11 +213,11 @@ class MessageCmd:
 
     def __heart_beat_reply(self, msg_dict: dict):
         if self.console_link_print:
-            print(f'\033[34m{get_time()} 收到心跳包回复：{msg_dict["data"]["count"]}\033[0m')
+            print(f'\033[34m{get_time()} 收到心跳包回复：{msg_dict["Data"]["count"]}\033[0m')
 
     def __auth_reply(self, msg_dict: dict):
         if self.console_link_print:
-            print(f'\033[34m{get_time()} 收到认证包回复：{msg_dict["data"]["code"]}\033[0m')
+            print(f'\033[34m{get_time()} 收到认证包回复：{msg_dict["Data"]["code"]}\033[0m')
 
     def set_function(self, name: str, func):
         self.cmd[name] = func

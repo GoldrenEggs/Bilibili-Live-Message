@@ -1,0 +1,46 @@
+{
+    "cmd": "NOTICE_MSG",
+    "id": 2,
+    "name": "分区道具抽奖广播样式",
+    "full": {
+        "head_icon": "http://i0.hdslb.com/bfs/live/00f26756182b2e9d06c00af23001bc8e10da67d0.webp",
+        "tail_icon": "http://i0.hdslb.com/bfs/live/822da481fdaba986d738db5d8fd469ffa95a8fa1.webp",
+        "head_icon_fa": "http://i0.hdslb.com/bfs/live/77983005023dc3f31cd599b637c83a764c842f87.png",
+        "tail_icon_fa": "http://i0.hdslb.com/bfs/live/38cb2a9f1209b16c0f15162b0b553e3b28d9f16f.png",
+        "head_icon_fan": 36,
+        "tail_icon_fan": 4,
+        "background": "#6098FFFF",
+        "color": "#FFFFFFFF",
+        "highlight": "#FDFF2FFF",
+        "time": 20
+    },
+    "half": {
+        "head_icon": "http://i0.hdslb.com/bfs/live/358cc52e974b315e83eee429858de4fee97a1ef5.png",
+        "tail_icon": "",
+        "background": "#7BB6F2FF",
+        "color": "#FFFFFFFF",
+        "highlight": "#FDFF2FFF",
+        "time": 15
+    },
+    "side": {
+        "head_icon": "",
+        "background": "",
+        "color": "",
+        "highlight": "",
+        "border": ""
+    },
+    "roomid": 474301,
+    "real_roomid": 474301,
+    "msg_common": "<%第一温柔还是比熊%>投喂:<%比熊比熊小%>1个鸿运小电视，点击前往TA的房间吧！",
+    "msg_self": "<%第一温柔还是比熊%>投喂:<%比熊比熊小%>1个鸿运小电视，快来围观吧！",
+    "link_url": "https://live.bilibili.com/474301?accept_quality=%5B10000%2C150%5D&broadcast_type=0&current_qn=150&current_quality=150&is_room_feed=1&live_play_network=other&p2p_type=0&playurl_h264=http%3A%2F%2Fd1--cn-gotcha04.bilivideo.com%2Flive-bvc%2F720158%2Flive_15251488_4465995_1500.flv%3Fexpires%3D1654980710%26len%3D0%26oi%3D0%26pt%3D%26qn%3D150%26trid%3D1000983308351bd54e64ae0c9eb3f9e13d44%26sigparams%3Dcdn%2Cexpires%2Clen%2Coi%2Cpt%2Cqn%2Ctrid%26cdn%3Dcn-gotcha04%26sign%3D5d7bdbff57d2546cca9cc9b9b8325d1c%26sk%3D2935686d6cb9146c7a6a6a0b4e120e250342be3df4dc8310261aab0ce9e21e44%26p2p_type%3D0%26src%3D57345%26sl%3D1%26flowtype%3D1%26source%3Dbatch%26order%3D1%26machinezone%3Dylf%26pp%3Drtmp%26site%3Dfac1fdf606bca214d393fa0d8bb8a77d&playurl_h265=&quality_description=%5B%7B%22qn%22%3A10000%2C%22desc%22%3A%22%E5%8E%9F%E7%94%BB%22%7D%2C%7B%22qn%22%3A150%2C%22desc%22%3A%22%E9%AB%98%E6%B8%85%22%7D%5D&from=28003&extra_jump_from=28003&live_lottery_type=1",
+    "msg_type": 2,
+    "shield_uid": -1,
+    "business_id": "31115",
+    "scatter": {
+        "min": 0,
+        "max": 0
+    },
+    "marquee_id": "",
+    "notice_type": 0
+}

@@ -1,0 +1,77 @@
+{
+    "cmd": "DANMU_MSG",
+    "info": [
+        [
+            0,
+            4,
+            25,
+            14893055,
+            1654975373298,
+            -782927485,
+            0,
+            "4921f89a",
+            0,
+            0,
+            5,
+            "#1453BAFF,#4C2263A2,#3353BAFF",
+            0,
+            "{}",
+            "{}",
+            {
+                "mode": 0,
+                "show_player_type": 0,
+                "extra": "{\"send_from_me\":false,\"mode\":0,\"color\":14893055,\"dm_type\":0,\"font_size\":25,\"player_mode\":4,\"show_player_type\":0,\"content\":\"嗯嗯\",\"user_hash\":\"1226963098\",\"emoticon_unique\":\"\",\"bulge_display\":0,\"recommend_score\":0,\"main_state_dm_color\":\"\",\"objective_state_dm_color\":\"\",\"direction\":0,\"pk_direction\":0,\"quartet_direction\":0,\"yeah_space_type\":\"\",\"yeah_space_url\":\"\",\"jump_to_url\":\"\",\"space_type\":\"\",\"space_url\":\"\"}"
+            }
+        ],
+        "嗯嗯",
+        [
+            502849207,
+            "QQ咩咩好喝到咩瞨茶",
+            0,
+            0,
+            0,
+            10000,
+            1,
+            "#00D1F1"
+        ],
+        [
+            26,
+            "Tigger",
+            "Hana_-",
+            9015372,
+            398668,
+            "",
+            0,
+            6809855,
+            398668,
+            6850801,
+            3,
+            1,
+            8454397
+        ],
+        [
+            17,
+            0,
+            6406234,
+            ">50000",
+            0
+        ],
+        [
+            "",
+            ""
+        ],
+        0,
+        3,
+        null,
+        {
+            "ts": 1654975373,
+            "ct": "739818D9"
+        },
+        0,
+        0,
+        null,
+        null,
+        0,
+        105
+    ]
+}
