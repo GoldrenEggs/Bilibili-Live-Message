@@ -15,7 +15,7 @@ def get_time():
 
 # 为消息添加时间头
 def time_print(msg: str):
-    print(get_time() + ' ' + msg)
+    print(f'{get_time()} {msg}')
 
 
 # 为消息添加头部
@@ -78,7 +78,7 @@ class Message:
             print(f'\033[34m{get_time()} 发送认证包\033[0m')
         self.sequence += 1
         self.webs.send(encode('{"roomid":%d}' % self.roomid, 7, self.sequence))
-        return True if self.webs.recv()[16:] == b'{"code":0}' else False
+        return self.webs.recv()[16:] == b'{"code":0}'
 
     # 发送心跳包
     def __send_heartbeat(self):
@@ -123,14 +123,8 @@ class Message:
         else:
             self.__console_link_print = False
             self.cmd.console_link_print = False
-        if 'Error' in args:
-            self.__console_error_print = True
-        else:
-            self.__console_error_print = False
-        if 'GetPack' in args:
-            self.cmd.console_get_pack_print = True
-        else:
-            self.cmd.console_get_pack_print = False
+        self.__console_error_print = 'Error' in args
+        self.cmd.console_get_pack_print = 'GetPack' in args
         return self
 
     def start(self):
@@ -236,9 +230,7 @@ class Header:
         if len(string) < 16:
             raise Exception(f'文件头长度小于16位，当前长度：{len(string)}，内容：{string}')
         self.string = string
-        self.header_list = []
-        for e, i in enumerate(self.index):
-            self.header_list.append(string[0 if e == 0 else self.index[e - 1]:i])
+        self.header_list = [string[0 if e == 0 else self.index[e - 1]: i] for e, i in enumerate(self.index)]
 
     def __getitem__(self, item: int):
         temp = self.header_list[item]
