@@ -1,6 +1,6 @@
 # Bilibili Live Message
 
-#本库已过时，请使用[Bliveir](https://github.com/GoldrenEggs/BiLiveir)
+# !!!本库已过时，请使用[Bliveir](https://github.com/GoldrenEggs/BiLiveir)!!!
 
 使用方法请参考 [main.py](main.py)，或者看下文
 
